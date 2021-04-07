@@ -25,7 +25,7 @@ object Recursion extends App{
     }
     factorialHelper(n,1)
   }
-  println(anotherFactorial(1000))
+  println(anotherFactorial(100))
 
   /*
   First factorialHelper is being called
@@ -42,4 +42,32 @@ object Recursion extends App{
   //The reason why this worked is we wrote factorialHelper as last expression of the code block
   //It doesn't save the intermediate results in the stack and this is called tail recursion
   //intellij identifies it as tail recursion
+
+  /*
+  1. Concatenate a string n times
+  2.  isPrime in tail recursion
+  3.  Fibanacci in tail recursion
+   */
+
+  //  1. Concatenate a string n times
+  def stringConcat(str:String, n:Int):String = {
+    str*n
+  }
+  println(stringConcat("Hello",5))
+
+  //  2.  isPrime in tail recursion
+  def isPrime(n:Int):Boolean = {
+    def isPrimeUntil(t:Int):Boolean = {
+      if (t <= 1) true
+      else n % t != 0 && isPrimeUntil(t-1)
+    }
+    isPrimeUntil(n/2)
+  }
+
+  // 3.  Fibanacci in tail recursion
+  def aFibonacci(num:Int):Int = {
+    if (num <= 2) 1
+    else aFibonacci(num - 1) + aFibonacci(num - 2)
+  }
+  println(aFibonacci(6))
 }
