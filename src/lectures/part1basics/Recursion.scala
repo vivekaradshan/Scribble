@@ -50,24 +50,44 @@ object Recursion extends App{
    */
 
   //  1. Concatenate a string n times
-  def stringConcat(str:String, n:Int):String = {
-    str*n
+  def stringConcat(str:String, n:Int, accumulator:String):String = {
+    if (n <= 0) accumulator
+    else stringConcat(str,n-1,str+accumulator)
   }
-  println(stringConcat("Hello",5))
+  println(stringConcat("Hello",5,""))
 
   //  2.  isPrime in tail recursion
   def isPrime(n:Int):Boolean = {
-    def isPrimeUntil(t:Int):Boolean = {
-      if (t <= 1) true
-      else n % t != 0 && isPrimeUntil(t-1)
+    def isPrimeUntil(t:Int, isStillPrime:Boolean):Boolean = {
+      if (!isStillPrime) false
+      else if (t <= 1) true
+      else isPrimeUntil((t-1),n % t != 0 && isStillPrime)
     }
-    isPrimeUntil(n/2)
+    isPrimeUntil(n/2, true)
   }
-
+  println(isPrime(500))
+  println(isPrime(503))
+/*
   // 3.  Fibanacci in tail recursion
   def aFibonacci(num:Int):Int = {
     if (num <= 2) 1
-    else aFibonacci(num - 1) + aFibonacci(num - 2)
+    else {
+      println(s"The Fibonacci number is $num")
+      val result :Int = aFibonacci(num - 1) + aFibonacci(num - 2)
+      println(s"The calculated number is $result")
+
+      result
+    }
   }
   println(aFibonacci(6))
+*/
+  def aFibonacciTailrec(n:Int):Int = {
+    def aHelper(x:Int,last:Int,nextToLast:Int):Int = {
+      if (x >= n) last
+      else aHelper(x+1, last+nextToLast,last)
+    }
+    if (n <= 2) 1
+    else aHelper(2,1,1)
+  }
+  println(aFibonacciTailrec(6))
 }
