@@ -1,6 +1,6 @@
 package lectures.part2oop
 
-object InheritanceAndTraits extends App{
+object Inheritance extends App{
 
   //single class inheritance
   class Animal {
@@ -29,7 +29,10 @@ object InheritanceAndTraits extends App{
 //Overriding
 class Dog(override val creatureType: String) extends Animal {
 //  override val creatureType: String = "Domestic"
-  override def eat: Unit = println("crunch, crunch")
+  override def eat: Unit = {
+    super.eat //super - when we want to refer method/field from parent class
+    println("crunch, crunch")
+  }
 }
   val dog = new Dog("Domestic")
   dog.eat
@@ -37,14 +40,22 @@ class Dog(override val creatureType: String) extends Animal {
 
 class Goat(GoatType: String) extends Animal {
   override val creatureType: String = GoatType
-  override def eat: Unit = println("crunch, crunch")
+  override def eat: Unit = println("munch, munch")
 }
   val goat = new Goat("Herbivore")
   println(goat.creatureType)
 
   //type substitution - polymorphism
-  val unknownAnimal = new Dog("")
+  //A method goes to most overridden version whenever possible
+  val unknownAnimal:Animal = new Dog("Canine")
+  unknownAnimal.eat
 
+  //overriding - different implementation in derived classes
+  //overloading - supplying multiple methods with different signatures but with same name under same class
 
+  //preventing overrides - put the keyword final
+  //final def eat = println("nomnom")
+  //final can be used even with class so you cannot extend the class
+  //seal the class - extend the class in this file and not in other files
 }
 
