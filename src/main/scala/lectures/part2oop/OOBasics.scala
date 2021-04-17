@@ -1,4 +1,4 @@
-package lectures.part2oop
+package main.scala.lectures.part2oop
 
 object OOBasics extends App {
 

@@ -9,6 +9,7 @@ object FunctionalProgramming extends App {
   val bob = new Person("Bob")
   bob.apply(29)
   bob(29)
+  class TempPerson
 
   /*
   Scala runs on JVM
